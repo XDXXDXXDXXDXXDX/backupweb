@@ -47,6 +47,7 @@ function appendCreditItem(name, value, waitVal, alreadyVal, leftTime) {
     `);
 }
 
+$('.confirm-chart').click(addAssets);
 $('#trueMoney').change(function() {
     $('.item-ctn').remove();
     $('.chart-ctn').prepend(`
