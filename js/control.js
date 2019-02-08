@@ -37,7 +37,6 @@ function appendAssetsItem(name, value) {
             $('.delete-chart').click(function() {
                 deleteRow(`${name}-${value}`)
             });
-            longClick = 0;//设置初始为0
             timeOutEvent = setTimeout(function() {
                 $('.chart-action').fadeIn()
                 // longClick = 1;//假如长按，则设置为1
@@ -89,9 +88,9 @@ function appendCreditItem(name, value, waitVal, alreadyVal, leftTime) {
             $('.delete-chart').click(function() {
                 deleteRow(`${name}-${value}`)
             });
-            longClick = 0;//设置初始为0
             timeOutEvent = setTimeout(function() {
-                longClick = 1;//假如长按，则设置为1
+                $('.chart-action').fadeIn()
+                // longClick = 1;//假如长按，则设置为1
             }, 500);
         },
         touchmove: function(e){
@@ -102,9 +101,9 @@ function appendCreditItem(name, value, waitVal, alreadyVal, leftTime) {
         touchend: function(e){
             // e.preventDefault();
             clearTimeout(timeOutEvent);
-            if(longClick == 1){
-                $('.chart-action').fadeIn()
-            }
+            // if(longClick == 1){
+            //     $('.chart-action').fadeIn()
+            // }
             return false;
         }
     }); 
