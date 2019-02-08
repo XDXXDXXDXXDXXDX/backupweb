@@ -45,7 +45,7 @@ function appendAssetsItem(name, value) {
         touchmove: function(e){
             clearTimeout(timeOutEvent);
             timeOutEvent = 0;
-            e.preventDefault();
+            // e.preventDefault();
         },
         touchend: function(e){
             // e.preventDefault();
@@ -96,7 +96,7 @@ function appendCreditItem(name, value, waitVal, alreadyVal, leftTime) {
         touchmove: function(e){
             clearTimeout(timeOutEvent);
             timeOutEvent = 0;
-            e.preventDefault();
+            // e.preventDefault();
         },
         touchend: function(e){
             // e.preventDefault();
