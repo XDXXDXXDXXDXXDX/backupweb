@@ -144,6 +144,11 @@ body {
     position: absolute;
     right: 13px;
     bottom: 5px;
+    width: auto;
+    border: none;
+    background: none;
+    width: 100px;
+    text-align: right;
 }
 
 .credit-item {
@@ -174,6 +179,10 @@ body {
     font-size: 13px;
     color: #D4ae79;
     float: right;
+    border: none;
+    background: none;
+    width: 100px;
+    text-align: right;
 }
 
 .new-chart, .chart-action{
