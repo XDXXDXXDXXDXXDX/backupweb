@@ -9,6 +9,7 @@ html {
 body {
     background-color: #EDEDED;
     overflow: hidden;
+    width: 100%;
 }
 
 .top-head {
@@ -35,10 +36,12 @@ body {
 
 .money {
     width: 100%;
+    box-sizing: border-box;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
     padding: 20px;
+    justify-content: space-between;
 }
 
 .total-money {
@@ -59,6 +62,10 @@ body {
     display: inline-block;
     padding: 12px;
     box-sizing: border-box;
+}
+
+.have-cash, .should-returned {
+    text-align: right
 }
 
 .total-money h5 {
