@@ -15,10 +15,8 @@ $(() => {
 function appendAssetsItem(name, value) {
     $('.assets').append(`
         <div class="assets-item">
-            <p>
-                <span>${name}</span>
-                <span class="assets-val-2">￥${toMoney(value)}</span>
-            </p>
+            <span class="assets-name-2">${name}</span>
+            <span class="assets-val-2">￥${toMoney(value)}</span>
         </div>
     `);
 }
@@ -189,6 +187,30 @@ function updateTotal() {
     $('.liability p').html(`￥${toMoney(liability)}`);
     $('.should-returned p').html(`￥${toMoney(shouldReturned)}`);
 }
+
+let longClick = 0;
+let timeOutEvent = '';
+$(".assets-item").on({
+    touchstart: function(){
+        longClick = 0;//设置初始为0
+        timeOutEvent = setTimeout(function() {
+            longClick = 1;//假如长按，则设置为1
+        }, 500);
+    },
+    touchmove: function(){
+        clearTimeout(timeOutEvent);
+        timeOutEvent = 0;
+        // e.preventDefault();
+    },
+    touchend: function(){
+        clearTimeout(timeOutEvent);
+        if(longClick == 0){
+            console.log(6868)
+        }
+        return false;
+    }
+});
+
 
 // 转换标准金额格式
 function toMoney(num){

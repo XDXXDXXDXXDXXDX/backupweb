@@ -113,22 +113,28 @@ body {
     height: 33.34px;
     margin-top: 6.66px;
     /* line-height: 33.34px; */
-    padding: 0 13.34px 8px 13.34px;
+    padding: 0 13px 8px 13px;
     box-sizing: border-box;
+    position: relative;
 }
 
-.assets-item span {
+.assets-item .assets-name-2 {
     /* margin-left: 13.34px; */
     font-size: 16px;
     color: #666666;
-    vertical-align: -4px;
+    position: absolute;
+    bottom: 8px;
+    /* vertical-align: -4px; */
 }
 
 .assets-item .assets-val-2 {
     font-size: 14px;
     color: #D4ae79;
-    float: right;
-    margin-top: 8px;
+    /* float: right;
+    margin-top: 8px; */
+    position: absolute;
+    right: 13px;
+    bottom: 8px;
 }
 
 .credit-item {
