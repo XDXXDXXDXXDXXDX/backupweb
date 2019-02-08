@@ -20,6 +20,15 @@ body {
     color: #8f8f8f;
 }
 
+.add-chart {
+    float: right;
+    margin-right: 20px;
+    color: #8f8f8f;
+    font-size: 40px;
+    font-weight: 300;
+    margin-top: -3px;
+}
+
 .top-head span {
     margin-left: 33px;
 }
