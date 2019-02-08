@@ -83,6 +83,7 @@ function appendCreditItem(name, value, waitVal, alreadyVal, leftTime) {
 
     $(`.${name}-${value}`).on({
         touchstart: function(e){
+            e.preventDefault();
             $('.delete-chart').unbind();
             $('.delete-chart').click(function() {
                 deleteRow(`${name}-${value}`)
