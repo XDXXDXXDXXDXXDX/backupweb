@@ -154,7 +154,7 @@ body {
     border-radius: 6.66px;
     padding: 26px;
     box-sizing: border-box;
-    /* display: none; */
+    display: none;
 }
 
 .confirm-chart, .cancel-chart {
@@ -170,6 +170,7 @@ body {
 
 .cancel-chart {
     background-color: #ff425c;
+    margin-right: 20px;
 }
 
 .chart-ctn-btn-group {
@@ -205,6 +206,38 @@ body {
 }
 
 .new-chart label {
-    color: #f9f9f9;
+    color: #666;
     font-size: 20px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"] + label::before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 18px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    /* border: 1px solid #666; */
+    background-color: #fff;
+    margin-right: 6px;
+    box-sizing: border-box;
+    vertical-align: -1px;
+    background-origin: content-box;
+}
+
+input[type="radio"]:checked + label::before {
+    background-color: #3EDEED;
+    background-origin: content-box;
+    background-clip: content-box;
+    /* padding: 2px; */
+    border: 2px #fff solid;
+}
+
+.moneyLabel {
+    margin-right: 19px;
 }
