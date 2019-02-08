@@ -57,14 +57,19 @@
         <div class="chart-ctn">
             <div class="item-ctn">
                 <input type="text" placeholder="NAME" class="assets-name">
-                <input type="text" placeholder="额度/剩余额度" class="assets-val">
+                <input type="number" placeholder="额度/剩余额度" class="assets-val">
             </div>
             <div class="chart-ctn-btn-group">
-                <button class="cancel-chart" onclick="$('.new-chart').fadeOut()">取消</button>
+                <button class="cancel-chart" onclick="$('.new-chart').fadeOut()">取&nbsp;&nbsp;消</button>
                 <button class="confirm-chart">确&nbsp;&nbsp;认</button>
             </div>
          
         </div>
+    </div>
+
+    <div class="chart-action">
+        <button class="cancel-chart-action" onclick="$('.chart-action').fadeOut()">取&nbsp;&nbsp;消</button>
+        <button class="delete-chart">删&nbsp;&nbsp;除</button>
     </div>
 
     <script src="./assets/jquery/jquery-3.3.1.min.js"></script>

@@ -147,6 +147,10 @@ body {
     padding-top: 8px;
 }
 
+.credit-item:active, .assets-item:active {
+    background-color: #929191;
+} 
+
 .credit-name-2 {
     font-size: 16px;
     color: #666666;
@@ -163,7 +167,7 @@ body {
     float: right;
 }
 
-.new-chart {
+.new-chart, .chart-action{
     position: fixed;
     /* height: 200px; */
     width: 284px;
@@ -177,7 +181,14 @@ body {
     display: none;
 }
 
-.confirm-chart, .cancel-chart {
+.chart-action {
+    padding: 20px;
+    top: 40%;
+    display: none;
+    text-align: center;
+}
+
+.confirm-chart, .cancel-chart, .chart-action .cancel-chart-action, .chart-action .delete-chart {
     width: 66px;
     height: 34px;
     background-color: #3EDEED;
@@ -186,6 +197,15 @@ body {
     border: none;
     outline: none;
     border-radius: 6px;
+}
+
+.chart-action .cancel-chart-action {
+    background-color: #666;
+    margin-right: 20px;
+}
+
+.chart-action .delete-chart {
+    background-color: #ff425c;
 }
 
 .cancel-chart {

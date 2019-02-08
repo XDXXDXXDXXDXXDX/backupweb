@@ -1,3 +1,6 @@
+let longClick = 0;
+let timeOutEvent = '';
+
 $(() => {
     if(localStorage.treasuryData) {
         let treasuryDataArr = JSON.parse(localStorage.treasuryData);
@@ -14,16 +17,43 @@ $(() => {
 
 function appendAssetsItem(name, value) {
     $('.assets').append(`
-        <div class="assets-item">
+        <div class="assets-item ${name}-${value}">
             <span class="assets-name-2">${name}</span>
             <span class="assets-val-2">￥${toMoney(value)}</span>
         </div>
     `);
+
+    $(`.${name}-${value}`).on({
+        touchstart: function(e){
+            // e.preventDefault();
+            $('.delete-chart').unbind();
+            $('.delete-chart').click(function() {
+                deleteRow(`${name}-${value}`)
+            });
+            longClick = 0;//设置初始为0
+            timeOutEvent = setTimeout(function() {
+                longClick = 1;//假如长按，则设置为1
+            }, 500);
+        },
+        touchmove: function(e){
+            clearTimeout(timeOutEvent);
+            timeOutEvent = 0;
+            e.preventDefault();
+        },
+        touchend: function(e){
+            // e.preventDefault();
+            clearTimeout(timeOutEvent);
+            if(longClick == 1){
+                $('.chart-action').fadeIn()
+            }
+            return false;
+        }
+    }); 
 }
 
 function appendCreditItem(name, value, waitVal, alreadyVal, leftTime) {
     $('.credit').append(`
-        <div class="credit-item">
+        <div class="credit-item ${name}-${value}">
             <p class="credit-name-2">${name}</p>
             <p>
                 <span>剩余余额</span>
@@ -39,10 +69,36 @@ function appendCreditItem(name, value, waitVal, alreadyVal, leftTime) {
             </p>
             <p>
                 <span>剩余期数</span>
-                <span class="already-val-2 val-2">${leftTime}</span>
+                <span class="left-time-2 val-2">${leftTime}</span>
             </p>
         </div>
     `);
+
+    $(`.${name}-${value}`).on({
+        touchstart: function(e){
+            $('.delete-chart').unbind();
+            $('.delete-chart').click(function() {
+                deleteRow(`${name}-${value}`)
+            });
+            longClick = 0;//设置初始为0
+            timeOutEvent = setTimeout(function() {
+                longClick = 1;//假如长按，则设置为1
+            }, 500);
+        },
+        touchmove: function(e){
+            clearTimeout(timeOutEvent);
+            timeOutEvent = 0;
+            e.preventDefault();
+        },
+        touchend: function(e){
+            // e.preventDefault();
+            clearTimeout(timeOutEvent);
+            if(longClick == 1){
+                $('.chart-action').fadeIn()
+            }
+            return false;
+        }
+    }); 
 }
 
 $('.confirm-chart').click(addAssets);
@@ -102,20 +158,21 @@ function addCredit() {
     })
 }
 
-function deleteRow(thisRow) {
-    $(thisRow).parents('.assets-item').remove();
-    $(thisRow).parents('.credit-item').remove();
+function deleteRow(rowClass) {
+    updateStorage('delete', {
+        type: $(`.${rowClass}`).hasClass("assets-item") ? 0 : 1, // 0资产类 1信用卡类
+        name: $(`.${rowClass} .assets-name-2`).html() || $(`.${rowClass} .credit-name-2`).html(), // 名称
+        value: toNumber($(`.${rowClass} .assets-val-2`).html()) || toNumber($(`.${rowClass} .credit-val-2`).html()), // 余额 / 额度
+        waitVal: toNumber($(`.${rowClass} .wait-val-2`).html()), // 待还
+        alreadyVal: toNumber($(`.${rowClass} .already-val-2`).html()), // 已出账
+        leftTime: $(`.${rowClass} .left-time-2`).html() // 剩余期数
+    })
+
+    $(`.${rowClass}`).remove();
 
     updateTotal();
 
-    updateStorage('delete', {
-        type: $(thisRow).parents('.assets-item').length == 1 ? 0 : 1, // 0资产类 1信用卡类
-        name: $(thisRow).prevAll('.assets-name-2').val() || $(thisRow).prevAll('.credit-name-2').val(), // 名称
-        value: toNumber($(thisRow).prevAll('.assets-val-2').html()) || toNumber($(thisRow).prevAll('.credit-val-2').html()), // 余额 / 额度
-        waitVal: toNumber($(thisRow).prevAll('.wait-val-2').html()), // 待还
-        alreadyVal: toNumber($(thisRow).prevAll('.already-val-2').html()), // 已出账
-        leftTime: $(thisRow).prevAll('.left-time-2').html() // 剩余期数
-    })
+    $('.chart-action').fadeOut()
 }
 
 //status add增加 delete删除; data 数据
@@ -130,6 +187,7 @@ data = {
 }
 */
 function updateStorage(status, data) {
+    console.log(data)
     if(status == 'add') {
         if(localStorage.treasuryData) {
             let treasuryDataArr = JSON.parse(localStorage.treasuryData);
@@ -188,30 +246,6 @@ function updateTotal() {
     $('.should-returned p').html(`￥${toMoney(shouldReturned)}`);
 }
 
-let longClick = 0;
-let timeOutEvent = '';
-$(".assets-item").on({
-    touchstart: function(){
-        longClick = 0;//设置初始为0
-        timeOutEvent = setTimeout(function() {
-            longClick = 1;//假如长按，则设置为1
-        }, 500);
-    },
-    touchmove: function(){
-        clearTimeout(timeOutEvent);
-        timeOutEvent = 0;
-        // e.preventDefault();
-    },
-    touchend: function(){
-        clearTimeout(timeOutEvent);
-        if(longClick == 0){
-            console.log(6868)
-        }
-        return false;
-    }
-});
-
-
 // 转换标准金额格式
 function toMoney(num){
     num = Number(num);
@@ -223,6 +257,10 @@ function toMoney(num){
 
 // 转换成普通数字格式
 function toNumber(string){
+    if(string == undefined) {
+        return false;
+    }
+    
     string = string.replace(/￥|,/g, '');
     return Number(string);;
 }
