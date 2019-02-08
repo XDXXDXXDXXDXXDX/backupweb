@@ -4,7 +4,7 @@
     font-family: "微软雅黑";
 }
 html {
-    overflow: hidden;
+    overflow-x: hidden;
 }
 body {
     background-color: #EDEDED;
@@ -85,6 +85,7 @@ body {
 .credit {
     padding-top: 20px;
 }
+
 .assets h1, .credit h1 {
     color: #D4ae79;
     font-weight: unset;
@@ -116,11 +117,94 @@ body {
     margin-top: 8px;
 }
 
+.credit-item {
+    background-color: #f9f9f9;
+    border-radius: 6.68px;
+    height: 120px;
+    margin-top: 6.66px;
+    padding: 0 13.34px;
+    box-sizing: border-box;
+    padding-top: 8px;
+}
+
+.credit-name-2 {
+    font-size: 16px;
+    color: #666666;
+}
+
+.credit-item p span {
+    font-size: 13px;
+    color: #b5b5b5;
+}
+
+.credit-item p .val-2 {
+    font-size: 13px;
+    color: #D4ae79;
+    float: right;
+}
+
 .new-chart {
     position: fixed;
     /* height: 200px; */
-    width: 80%;
+    width: 284px;
     top: 20%;
-    left: 10%;
-    background-color: #7f7f7f;
+    left: 50%;
+    margin-left: -142px;
+    background-color: #d4d4d4;
+    border-radius: 6.66px;
+    padding: 26px;
+    box-sizing: border-box;
+    /* display: none; */
+}
+
+.confirm-chart, .cancel-chart {
+    width: 66px;
+    height: 34px;
+    background-color: #3EDEED;
+    color: #fff;
+    font-size: 13px;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+}
+
+.cancel-chart {
+    background-color: #ff425c;
+}
+
+.chart-ctn-btn-group {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.chart-ctn input {
+    border-radius: 6px;
+    width: 230px;
+    height: 33px;
+    border: none;
+    color: #b5b5b5;
+    font-size: 14px;
+    margin-top: 20px;
+    text-indent: 22px;
+}
+.chart-ctn input::-webkit-input-placeholder {
+    color: #b5b5b5;
+    font-size: 14px;
+}
+.chart-ctn input::-moz-placeholder {
+    color: #b5b5b5;
+    font-size: 14px;
+}
+.chart-ctn input:-ms-input-placeholder {
+    color: #b5b5b5;
+    font-size: 14px;
+}
+.chart-ctn input::placeholder {
+    color: #b5b5b5;
+    font-size: 14px;
+}
+
+.new-chart label {
+    color: #f9f9f9;
+    font-size: 20px;
 }

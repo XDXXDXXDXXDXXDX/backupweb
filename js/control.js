@@ -26,47 +26,52 @@ function appendAssetsItem(name, value) {
 function appendCreditItem(name, value, waitVal, alreadyVal, leftTime) {
     $('.credit').append(`
         <div class="credit-item">
-            <input type="text" class="credit-name-2" value=${name}>
-            <input type="number" class="credit-val-2" value=${value}>
-            <input type="number" class="wait-val-2" value=${waitVal}>
-            <input type="number" class="already-val-2" value=${alreadyVal}>
-            <input type="number" class="left-time-2" value=${leftTime}>
+            <p class="credit-name-2">${name}</p>
+            <p>
+                <span>剩余余额</span>
+                <span class="credit-val-2 val-2">￥${toMoney(value)}</span>
+            </p>
+            <p>
+                <span>待还金额</span>
+                <span class="wait-val-2 val-2">￥${toMoney(waitVal)}</span>
+            </p>
+            <p>
+                <span>出帐待还</span>
+                <span class="already-val-2 val-2">￥${toMoney(alreadyVal)}</span>
+            </p>
+            <p>
+                <span>剩余期数</span>
+                <span class="already-val-2 val-2">${leftTime}</span>
+            </p>
         </div>
     `);
 }
 
-$('#item-choose').change(function() {
+$('#trueMoney').change(function() {
     $('.item-ctn').remove();
-    if($('#item-choose').val() == 0) {
-        $('.chart-ctn').prepend(`
-            <div class="item-ctn">
-                <p>资产名</p>
-                <input type="text" placeholder="微信、支付宝等" class="assets-name">
-                <p>余额</p>
-                <input type="text" placeholder="88888888" class="assets-val">
-            </div>
-        `);
+    $('.chart-ctn').prepend(`
+        <div class="item-ctn">
+            <input type="text" placeholder="NAME" class="assets-name">
+            <input type="text" placeholder="额度/剩余额度" class="assets-val">
+        </div>
+    `);
 
-        $('.confirm-chart').unbind();
-        $('.confirm-chart').click(addAssets);
-    }else if($('#item-choose').val() == 1){
-        $('.chart-ctn').prepend(`
-            <div class="item-ctn">
-                <p>信用名</p>
-                <input type="text" placeholder="花呗，、白条等" class="credit-name">
-                <p>剩余额度</p>
-                <input type="text" placeholder="88888888" class="credit-val">
-                <p>待还</p>
-                <input type="text" placeholder="666666" class="wait-val">
-                <p>已出账</p>
-                <input type="text" placeholder="233" class="already-val">
-                <p>剩余期数</p>
-                <input type="text" placeholder="12" class="left-time">
-            </div>
-        `);
-        $('.confirm-chart').unbind();
-        $('.confirm-chart').click(addCredit);
-    }
+    $('.confirm-chart').unbind();
+    $('.confirm-chart').click(addAssets);
+});
+$('#creditMoney').change(function() {
+    $('.item-ctn').remove();
+    $('.chart-ctn').prepend(`
+        <div class="item-ctn">
+            <input type="text" placeholder="NAME" class="credit-name">
+            <input type="text" placeholder="额度/剩余额度" class="credit-val">
+            <input type="text" placeholder="待还金额" class="wait-val">
+            <input type="text" placeholder="出帐待还" class="already-val">
+            <input type="text" placeholder="剩余期数" class="left-time">
+        </div>
+    `);
+    $('.confirm-chart').unbind();
+    $('.confirm-chart').click(addCredit);
 });
 
 function addAssets() {
@@ -107,10 +112,10 @@ function deleteRow(thisRow) {
     updateStorage('delete', {
         type: $(thisRow).parents('.assets-item').length == 1 ? 0 : 1, // 0资产类 1信用卡类
         name: $(thisRow).prevAll('.assets-name-2').val() || $(thisRow).prevAll('.credit-name-2').val(), // 名称
-        value: $(thisRow).prevAll('.assets-val-2').val() || $(thisRow).prevAll('.credit-val-2').val(), // 余额 / 额度
-        waitVal: $(thisRow).prevAll('.wait-val-2').val(), // 待还
-        alreadyVal: $(thisRow).prevAll('.already-val-2').val(), // 已出账
-        leftTime: $(thisRow).prevAll('.left-time-2').val() // 剩余期数
+        value: toNumber($(thisRow).prevAll('.assets-val-2').html()) || toNumber($(thisRow).prevAll('.credit-val-2').html()), // 余额 / 额度
+        waitVal: toNumber($(thisRow).prevAll('.wait-val-2').html()), // 待还
+        alreadyVal: toNumber($(thisRow).prevAll('.already-val-2').html()), // 已出账
+        leftTime: $(thisRow).prevAll('.left-time-2').html() // 剩余期数
     })
 }
 
@@ -167,15 +172,15 @@ function updateTotal() {
     });
 
     $('.credit-item .credit-val-2').each(function() {
-        availableCash += Number($(this).val());
+        availableCash += toNumber($(this).html());
     });
 
     $('.credit-item .wait-val-2').each(function() {
-        liability += Number($(this).val());
+        liability += toNumber($(this).html());
     });
 
     $('.credit-item .already-val-2').each(function() {
-        shouldReturned += Number($(this).val());
+        shouldReturned += toNumber($(this).html());
     });
 
     $('.available-cash p').html(`￥${toMoney(availableCash)}`);
