@@ -13,7 +13,14 @@ $(() => {
         }
         updateTotal();
     }
+    if(localStorage.bankName) {
+        $('.bank-name').val(localStorage.bankName);
+    }
 });
+
+$('.bank-name').change(() => {
+    localStorage.bankName = $('.bank-name').val();
+})
 
 function appendAssetsItem(name, value) {
     $('.assets').append(`

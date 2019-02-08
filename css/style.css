@@ -30,6 +30,15 @@ body {
     margin-top: -3px;
 }
 
+.top-head input {
+    margin-left: 33px;
+    color: #8f8f8f;
+    font-size: 20px;
+    border: none;
+    background: none;
+    width: 150px;
+}
+
 .top-head span {
     margin-left: 33px;
 }
