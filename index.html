@@ -73,7 +73,12 @@
         <button class="delete-chart">删&nbsp;&nbsp;除</button>
     </div>
 
+    <div class="clear-data" style="display:none;position:fixed;top:100px;left:30px;">
+        <button class="cancel-clear-data" onclick="$('.clear-data').fadeOut()">取消</button>
+        <button class="confirm-clear-data" onclick="localStorage.treasuryData = undefined">清除数据</button>
+    </div>
+
     <script src="./assets/jquery/jquery-3.3.1.min.js"></script>
-    <script src="./js/control.js?v1.0"></script>
+    <script src="./js/control.js?v1.1"></script>
 </body>
 </html>

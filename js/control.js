@@ -22,6 +22,18 @@ $('.bank-name').change(() => {
     localStorage.bankName = $('.bank-name').val();
 })
 
+let clearData = 0;
+$('body').click(showClearData);
+
+function showClearData() {
+    clearData++;
+    if(clearData == 10) {
+        $('.clear-data').fadeIn();
+        clearData = 0;
+        $('body').unbind('click', showClearData);
+    }
+}
+
 function appendAssetsItem(name, value) {
     $('.assets').append(`
         <div class="assets-item ${name}-${value}">
@@ -250,7 +262,7 @@ data = {
 }
 */
 function updateStorage(status, data) {
-    console.log(data)
+
     if(status == 'add') {
         if(localStorage.treasuryData) {
             let treasuryDataArr = JSON.parse(localStorage.treasuryData);
