@@ -3,29 +3,37 @@ $(() => {
         let treasuryDataArr = JSON.parse(localStorage.treasuryData);
         for(let data of treasuryDataArr) {
             if(data.type == 0) {
-                $('.assets').append(`
-                    <div class="assets-item">
-                        <input type="text" class="assets-name-2" value=${data.name}>
-                        <input type="number" class="assets-val-2" value=${data.value}>
-                        <i class="far fa-trash-alt" onclick="deleteRow(this)"></i>
-                    </div>
-                `);
+                appendAssetsItem(data.name, data.value)
             }else{
-                $('.credit').append(`
-                    <div class="credit-item">
-                        <input type="text" class="credit-name-2" value=${data.name}>
-                        <input type="number" class="credit-val-2" value=${data.value}>
-                        <input type="number" class="wait-val-2" value=${data.waitVal}>
-                        <input type="number" class="already-val-2" value=${data.alreadyVal}>
-                        <input type="number" class="left-time-2" value=${data.leftTime}>
-                        <i class="far fa-trash-alt" onclick="deleteRow(this)"></i>
-                    </div>
-                `);
+                appendCreditItem(data.name, data.value, data.waitVal, data.alreadyVal, data.leftTime)
             }
         }
         updateTotal();
     }
-})
+});
+
+function appendAssetsItem(name, value) {
+    $('.assets').append(`
+        <div class="assets-item">
+            <p>
+                <span>${name}</span>
+                <span class="assets-val-2">￥${toMoney(value)}</span>
+            </p>
+        </div>
+    `);
+}
+
+function appendCreditItem(name, value, waitVal, alreadyVal, leftTime) {
+    $('.credit').append(`
+        <div class="credit-item">
+            <input type="text" class="credit-name-2" value=${name}>
+            <input type="number" class="credit-val-2" value=${value}>
+            <input type="number" class="wait-val-2" value=${waitVal}>
+            <input type="number" class="already-val-2" value=${alreadyVal}>
+            <input type="number" class="left-time-2" value=${leftTime}>
+        </div>
+    `);
+}
 
 $('#item-choose').change(function() {
     $('.item-ctn').remove();
@@ -62,13 +70,7 @@ $('#item-choose').change(function() {
 });
 
 function addAssets() {
-    $('.assets').append(`
-        <div class="assets-item">
-            <input type="text" class="assets-name-2" value=${$('.assets-name').val()}>
-            <input type="number" class="assets-val-2" value=${$('.assets-val').val()}>
-            <i class="far fa-trash-alt" onclick="deleteRow(this)"></i>
-        </div>
-    `);
+    appendAssetsItem($('.assets-name').val(), $('.assets-val').val())
 
     $('.new-chart').fadeOut();
     updateTotal();
@@ -81,16 +83,7 @@ function addAssets() {
 }
 
 function addCredit() {
-    $('.credit').append(`
-        <div class="credit-item">
-            <input type="text" class="credit-name-2" value=${$('.credit-name').val()}>
-            <input type="number" class="credit-val-2" value=${$('.credit-val').val()}>
-            <input type="number" class="wait-val-2" value=${$('.wait-val').val()}>
-            <input type="number" class="already-val-2" value=${$('.already-val').val()}>
-            <input type="number" class="left-time-2" value=${$('.left-time').val()}>
-            <i class="far fa-trash-alt" onclick="deleteRow(this)"></i>
-        </div>
-    `);
+    appendCreditItem($('.credit-name').val(), $('.credit-val').val(), $('.wait-val').val(), $('.already-val').val(), $('.left-time').val())
 
     $('.new-chart').fadeOut();
     updateTotal();
@@ -133,7 +126,6 @@ data = {
 }
 */
 function updateStorage(status, data) {
-    console.log(data)
     if(status == 'add') {
         if(localStorage.treasuryData) {
             let treasuryDataArr = JSON.parse(localStorage.treasuryData);
@@ -170,8 +162,8 @@ function updateTotal() {
     let shouldReturned = 0;
 
     $('.assets-item .assets-val-2').each(function() {
-        availableCash += Number($(this).val());
-        haveCash += Number($(this).val());
+        availableCash += toNumber($(this).html());
+        haveCash += toNumber($(this).html());
     });
 
     $('.credit-item .credit-val-2').each(function() {
@@ -186,8 +178,23 @@ function updateTotal() {
         shouldReturned += Number($(this).val());
     });
 
-    $('.available-cash p').html(availableCash);
-    $('.have-cash p').html(haveCash);
-    $('.liability p').html(liability);
-    $('.should-returned p').html(shouldReturned);
+    $('.available-cash p').html(`￥${toMoney(availableCash)}`);
+    $('.have-cash p').html(`￥${toMoney(haveCash)}`);
+    $('.liability p').html(`￥${toMoney(liability)}`);
+    $('.should-returned p').html(`￥${toMoney(shouldReturned)}`);
+}
+
+// 转换标准金额格式
+function toMoney(num){
+    num = Number(num);
+    num = num.toFixed(2);
+    num = parseFloat(num)
+    num = num.toLocaleString();
+    return num;//返回的是字符串23,245.12保留2位小数
+}
+
+// 转换成普通数字格式
+function toNumber(string){
+    string = string.replace(/￥|,/g, '');
+    return Number(string);;
 }

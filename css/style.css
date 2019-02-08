@@ -1,12 +1,27 @@
 * {
     padding: 0;
     margin: 0;
+    font-family: "微软雅黑";
+}
+html {
+    overflow: hidden;
+}
+body {
+    background-color: #EDEDED;
+    overflow: hidden;
 }
 
 .top-head {
     width: 100%;
-    height: 150px;
-    line-height: 150px;
+    height: 50px;
+    line-height: 50px;
+    background-color: #F9F9F9;
+    font-size: 20px;
+    color: #8f8f8f;
+}
+
+.top-head span {
+    margin-left: 33px;
 }
 
 .money {
@@ -14,6 +29,7 @@
     height: 100%;
     display: flex;
     flex-wrap: wrap;
+    padding: 20px;
 }
 
 .total-money {
@@ -21,17 +37,74 @@
     width: 50%;
     height: 80px;
     flex-grow: 1;
-    text-align: center;
+    /* padding: 20px; */
+    /* box-sizing: border-box; */
+    
 }
 
-.assets {
-    background-color: rgb(232, 161, 7);
-    min-height: 50px;
+.total-money div {
+    border-radius: 6.68px; 
+    background-color: #f9f9f9;
+    width: 150px;
+    height: 83.34px;
+    display: inline-block;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.total-money h5 {
+    color: #666666;
+    font-weight: unset;
+    font-size: 16.67px;
+}
+
+.total-money p {
+    text-align: right;
+    color: #D4ae79;
+    font-size: 26.66px;
+    margin-top: 9px;
+}
+
+.liability, .should-returned {
+    margin-top: 20px;
+}
+
+.assets, .credit {
+    padding: 0 20px;
 }
 
 .credit {
-    background-color: rgb(47, 134, 193);
-    min-height: 50px;
+    padding-top: 20px;
+}
+.assets h1, .credit h1 {
+    color: #D4ae79;
+    font-weight: unset;
+    font-size: 20px;
+    margin-left: 12px;
+}
+
+.assets .assets-item {
+    background-color: #f9f9f9;
+    border-radius: 6.68px;
+    height: 33.34px;
+    margin-top: 6.66px;
+    /* line-height: 33.34px; */
+    padding: 0 13.34px 8px 13.34px;
+    box-sizing: border-box;
+}
+
+.assets-item span {
+    /* margin-left: 13.34px; */
+    font-size: 16px;
+    color: #666666;
+    vertical-align: -4px;
+}
+
+.assets-item .assets-val-2 {
+    font-size: 14px;
+    color: #D4ae79;
+    float: right;
+    margin-top: 8px;
 }
 
 .new-chart {
