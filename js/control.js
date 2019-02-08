@@ -32,7 +32,7 @@ function appendAssetsItem(name, value) {
 
     $(`.${name}-${value}`).on({
         touchstart: function(e){
-            // e.preventDefault();
+            e.preventDefault();
             $('.delete-chart').unbind();
             $('.delete-chart').click(function() {
                 deleteRow(`${name}-${value}`)
