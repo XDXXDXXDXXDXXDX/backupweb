@@ -10,6 +10,7 @@ body {
     background-color: #EDEDED;
     overflow: hidden;
     width: 100%;
+    padding-bottom: 20px;
 }
 
 .top-head {

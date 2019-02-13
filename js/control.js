@@ -470,10 +470,10 @@ function updateTotal() {
         shouldReturned += toNumber($(this).html());
     });
 
-    $('.available-cash p').html(`￥${toMoney(availableCash)}`);
-    $('.have-cash p').html(`￥${toMoney(haveCash)}`);
-    $('.liability p').html(`￥${toMoney(liability)}`);
-    $('.should-returned p').html(`￥${toMoney(shouldReturned)}`);
+    $('.available-cash p').html(`￥${toMoney(Math.round(availableCash))}`);
+    $('.have-cash p').html(`￥${toMoney(Math.round(haveCash))}`);
+    $('.liability p').html(`￥${toMoney(Math.round(liability))}`);
+    $('.should-returned p').html(`￥${toMoney(Math.round(shouldReturned))}`);
 }
 
 // 转换标准金额格式
