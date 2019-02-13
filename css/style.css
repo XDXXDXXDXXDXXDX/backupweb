@@ -46,7 +46,8 @@ body {
     font-size: 20px;
     border: none;
     background: none;
-    width: 150px;
+    outline: none;
+    /* width: 150px; */
 }
 
 .top-head span {

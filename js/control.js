@@ -318,7 +318,6 @@ function addAssets() {
     appendAssetsItem(id, $('.assets-name').val(), $('.assets-val').val())
 
     $('.new-chart').fadeOut();
-    updateTotal();
 
     updateStorage('add', {
         id: id,
@@ -336,7 +335,6 @@ function addCredit() {
     appendCreditItem(id, $('.credit-name').val(), $('.credit-val').val(), $('.wait-val').val(), $('.already-val').val(), $('.left-time').val())
 
     $('.new-chart').fadeOut();
-    updateTotal();
 
     updateStorage('add', {
         id: id,
@@ -365,8 +363,6 @@ function deleteRow(rowId) {
 
     $(`#${rowId}`).remove();
 
-    updateTotal();
-
     $('.chart-action').fadeOut()
 }
 
@@ -383,6 +379,7 @@ data = {
 }
 */
 function updateStorage(status, data) {
+    updateTotal();
 
     if(status == 'add') {
         if(localStorage.treasuryData) {
