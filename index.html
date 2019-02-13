@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MINI BANK</title>
-    <link rel="stylesheet" href="./css/style.css?v1.8">
+    <link rel="stylesheet" href="./css/style.css?v2.0">
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css">
 </head>
@@ -63,7 +63,7 @@
                 <input type="number" placeholder="额度/剩余额度" class="assets-val">
             </div>
             <div class="chart-ctn-btn-group">
-                <button class="cancel-chart" onclick="$('.new-chart1').fadeOut()">取&nbsp;&nbsp;消</button>
+                <button class="cancel-chart" onclick="$('.new-chart1').fadeOut();clearIuput()">取&nbsp;&nbsp;消</button>
                 <button class="confirm-chart" onclick="addAssets()">确&nbsp;&nbsp;认</button>
             </div>
         </div>
@@ -72,13 +72,13 @@
         <div class="chart-ctn">
             <div class="item-ctn">
                 <input type="text" placeholder="NAME" class="credit-name">
-                <input type="text" placeholder="额度/剩余额度" class="credit-val">
-                <input type="text" placeholder="待还金额" class="wait-val">
-                <input type="text" placeholder="出帐待还" class="already-val">
-                <input type="text" placeholder="剩余期数" class="left-time">
+                <input type="number" placeholder="额度/剩余额度" class="credit-val">
+                <input type="number" placeholder="待还金额" class="wait-val">
+                <input type="number" placeholder="出帐待还" class="already-val">
+                <input type="number" placeholder="剩余期数" class="left-time">
             </div>
             <div class="chart-ctn-btn-group">
-                <button class="cancel-chart" onclick="$('.new-chart2').fadeOut()">取&nbsp;&nbsp;消</button>
+                <button class="cancel-chart" onclick="$('.new-chart2').fadeOut();clearIuput()">取&nbsp;&nbsp;消</button>
                 <button class="confirm-chart" onclick="addCredit()">确&nbsp;&nbsp;认</button>
             </div>
         </div>
@@ -116,6 +116,6 @@
     </div>
 
     <script src="./assets/jquery/jquery-3.3.1.min.js"></script>
-    <script src="./js/control.js?v1.8"></script>
+    <script src="./js/control.js?v2.0"></script>
 </body>
 </html>

@@ -193,7 +193,7 @@ body {
     float: right;
     border: none;
     background: none;
-    width: 100px;
+    /* width: 100px; */
     text-align: right;
 }
 

@@ -236,14 +236,14 @@ function updateChart(id, type) {
                 <div class="chart-ctn">
                     <div class="item-ctn">
                         <input type="text" placeholder="NAME" class="credit-name2" value="${$(`#${id} .credit-name-2`).html()}">
-                        <input type="text" placeholder="额度/剩余额度" class="credit-val2" value="${toNumber($(`#${id} .credit-val-2`).html())}">
-                        <input type="text" placeholder="待还金额" class="wait-val2" value="${toNumber($(`#${id} .wait-val-2`).html())}">
-                        <input type="text" placeholder="出帐待还" class="already-val2" value="${toNumber($(`#${id} .already-val-2`).html())}">
-                        <input type="text" placeholder="剩余期数" class="left-time2" value="${$(`#${id} .left-time-2`).html()}">
+                        <input type="number" placeholder="额度/剩余额度" class="credit-val2" value="${toNumber($(`#${id} .credit-val-2`).html())}">
+                        <input type="number" placeholder="待还金额" class="wait-val2" value="${toNumber($(`#${id} .wait-val-2`).html())}">
+                        <input type="number" placeholder="出帐待还" class="already-val2" value="${toNumber($(`#${id} .already-val-2`).html())}">
+                        <input type="number" placeholder="剩余期数" class="left-time2" value="${$(`#${id} .left-time-2`).html()}">
                     </div>
                     <div class="chart-ctn-btn-group">
                         <button class="cancel-chart" onclick="$('.update-chart-box').remove()">取&nbsp;&nbsp;消</button>
-                        <button class="confirm-chart" onclick="addCredit()">确&nbsp;&nbsp;认</button>
+                        <button class="confirm-chart" onclick="updateCredit(${id})">确&nbsp;&nbsp;认</button>
                     </div>
                 </div>
             </div>`
@@ -267,15 +267,22 @@ function updateAssets(id) {
 }
 
 function updateCredit(id) {
-    $(`#${id} .assets-name-2`).html($('.assets-name2').val());
-    $(`#${id} .assets-val-2`).html(`￥${toMoney($('.assets-val2').val())}`);
+    $(`#${id} .credit-name-2`).html($('.credit-name2').val());
+    $(`#${id} .credit-val-2`).html(`￥${toMoney($('.credit-val2').val())}`);
+    $(`#${id} .wait-val-2`).html(`￥${toMoney($('.wait-val2').val())}`);
+    $(`#${id} .already-val-2`).html(`￥${toMoney($('.already-val2').val())}`);
+    $(`#${id} .left-time-2`).html($('.left-time2').val());
 
     updateStorage('update', {
         id: id,
-        type: 0, // 0资产类 1信用卡类
-        name: $('.assets-name2').val(), // 名称
-        value: $('.assets-val2').val() // 余额 / 额度
+        type: 1, // 0资产类 1信用卡类
+        name: $('.credit-name2').val(), // 名称
+        value: $('.credit-val2').val(), // 余额 / 额度
+        waitVal: $('.wait-val2').val(), // 待还
+        alreadyVal: $('.already-val2').val(), // 已出账
+        leftTime: $('.left-time2').val() // 剩余期数
     });
+
     $('.update-chart-box').remove()
     $('.chart-action').fadeOut();
 }
@@ -320,7 +327,8 @@ function addAssets() {
         value: $('.assets-val').val() // 余额 / 额度
     });
 
-    $('.new-chart1').fadeOut()
+    $('.new-chart1').fadeOut();
+    clearIuput();
 }
 
 function addCredit() {
@@ -340,7 +348,8 @@ function addCredit() {
         leftTime: $('.left-time').val() // 剩余期数
     })
 
-    $('.new-chart2').fadeOut()
+    $('.new-chart2').fadeOut();
+    clearIuput();
 }
 
 function deleteRow(rowId) {
@@ -490,5 +499,7 @@ function toNumber(string){
 }
 
 function clearIuput() {
-    
+    $('.item-ctn input').each(function(index, ele) {
+        ele.value = '';
+    })
 }
