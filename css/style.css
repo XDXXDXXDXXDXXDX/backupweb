@@ -196,11 +196,11 @@ body {
     text-align: right;
 }
 
-.new-chart, .chart-action{
+.new-chart1, .new-chart2, .chart-action{
     position: fixed;
     /* height: 200px; */
     width: 284px;
-    top: 20%;
+    top: 12%;
     left: 50%;
     margin-left: -142px;
     background-color: #d4d4d4;
@@ -208,6 +208,10 @@ body {
     padding: 26px;
     box-sizing: border-box;
     display: none;
+}
+
+.new-chart1 {
+    top: 20%; 
 }
 
 .chart-action {

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MINI BANK</title>
-    <link rel="stylesheet" href="./css/style.css?v1.5">
+    <link rel="stylesheet" href="./css/style.css?v1.6">
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css">
 </head>
@@ -47,18 +47,43 @@
     <div class="assets">
         <div>
             <h1>真实资本</h1>
-            <span class="add-chart" onclick="$('.new-chart').fadeIn()">+</span>
+            <span class="add-chart" onclick="$('.new-chart1').fadeIn()">+</span>
         </div>  
     </div>
-
     <div class="credit">
         <div>
             <h1>信用资本</h1>
-            <span class="add-chart" onclick="$('.new-chart').fadeIn()">+</span>
+            <span class="add-chart" onclick="$('.new-chart2').fadeIn()">+</span>
         </div>
     </div>
-    
-    <div class="new-chart">
+    <div class="new-chart1">
+        <div class="chart-ctn">
+            <div class="item-ctn">
+                <input type="text" placeholder="NAME" class="assets-name">
+                <input type="number" placeholder="额度/剩余额度" class="assets-val">
+            </div>
+            <div class="chart-ctn-btn-group">
+                <button class="cancel-chart" onclick="$('.new-chart1').fadeOut()">取&nbsp;&nbsp;消</button>
+                <button class="confirm-chart" onclick="addAssets()">确&nbsp;&nbsp;认</button>
+            </div>
+        </div>
+    </div>
+    <div class="new-chart2">
+        <div class="chart-ctn">
+            <div class="item-ctn">
+                <input type="text" placeholder="NAME" class="credit-name">
+                <input type="text" placeholder="额度/剩余额度" class="credit-val">
+                <input type="text" placeholder="待还金额" class="wait-val">
+                <input type="text" placeholder="出帐待还" class="already-val">
+                <input type="text" placeholder="剩余期数" class="left-time">
+            </div>
+            <div class="chart-ctn-btn-group">
+                <button class="cancel-chart" onclick="$('.new-chart2').fadeOut()">取&nbsp;&nbsp;消</button>
+                <button class="confirm-chart" onclick="addCredit()">确&nbsp;&nbsp;认</button>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="new-chart">
         <input type="radio" name="item-choose" value="0" id="trueMoney" checked><label class="moneyLabel" for="trueMoney">真实资本</label>
         <input type="radio" name="item-choose" value="1" id="creditMoney"><label for="creditMoney">信用资本</label> 
         <div class="chart-ctn">
@@ -72,20 +97,20 @@
             </div>
          
         </div>
-    </div>
+    </div> -->
 
     <div class="chart-action">
         <button class="cancel-chart-action" onclick="$('.chart-action').fadeOut()">取&nbsp;&nbsp;消</button>
         <button class="delete-chart">删&nbsp;&nbsp;除</button>
         <button class="update-chart">修&nbsp;&nbsp;改</button>
     </div>
-
+<!-- 
     <div class="clear-data" style="display:none;position:fixed;top:100px;left:30px;">
         <button class="cancel-clear-data" onclick="$('.clear-data').fadeOut()">取消</button>
         <button class="confirm-clear-data" onclick="localStorage.treasuryData = ''">清除数据</button>
-    </div>
+    </div> -->
 
     <script src="./assets/jquery/jquery-3.3.1.min.js"></script>
-    <script src="./js/control.js?v1.5"></script>
+    <script src="./js/control.js?v1.6"></script>
 </body>
 </html>

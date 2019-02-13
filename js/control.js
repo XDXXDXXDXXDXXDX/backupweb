@@ -196,33 +196,33 @@ function appendCreditItem(id, name, value, waitVal, alreadyVal, leftTime) {
     // }); 
 }
 
-$('.confirm-chart').click(addAssets);
-$('#trueMoney').change(function() {
-    $('.item-ctn').remove();
-    $('.chart-ctn').prepend(`
-        <div class="item-ctn">
-            <input type="text" placeholder="NAME" class="assets-name">
-            <input type="text" placeholder="额度/剩余额度" class="assets-val">
-        </div>
-    `);
+// $('.confirm-chart').click(addAssets);
+// $('#trueMoney').change(function() {
+//     $('.item-ctn').remove();
+//     $('.chart-ctn').prepend(`
+//         <div class="item-ctn">
+//             <input type="text" placeholder="NAME" class="assets-name">
+//             <input type="text" placeholder="额度/剩余额度" class="assets-val">
+//         </div>
+//     `);
 
-    $('.confirm-chart').unbind();
-    $('.confirm-chart').click(addAssets);
-});
-$('#creditMoney').change(function() {
-    $('.item-ctn').remove();
-    $('.chart-ctn').prepend(`
-        <div class="item-ctn">
-            <input type="text" placeholder="NAME" class="credit-name">
-            <input type="text" placeholder="额度/剩余额度" class="credit-val">
-            <input type="text" placeholder="待还金额" class="wait-val">
-            <input type="text" placeholder="出帐待还" class="already-val">
-            <input type="text" placeholder="剩余期数" class="left-time">
-        </div>
-    `);
-    $('.confirm-chart').unbind();
-    $('.confirm-chart').click(addCredit);
-});
+//     $('.confirm-chart').unbind();
+//     $('.confirm-chart').click(addAssets);
+// });
+// $('#creditMoney').change(function() {
+//     $('.item-ctn').remove();
+//     $('.chart-ctn').prepend(`
+//         <div class="item-ctn">
+//             <input type="text" placeholder="NAME" class="credit-name">
+//             <input type="text" placeholder="额度/剩余额度" class="credit-val">
+//             <input type="text" placeholder="待还金额" class="wait-val">
+//             <input type="text" placeholder="出帐待还" class="already-val">
+//             <input type="text" placeholder="剩余期数" class="left-time">
+//         </div>
+//     `);
+//     $('.confirm-chart').unbind();
+//     $('.confirm-chart').click(addCredit);
+// });
 
 function addAssets() {
     let id = Date.now();
@@ -236,7 +236,9 @@ function addAssets() {
         type: 0, // 0资产类 1信用卡类
         name: $('.assets-name').val(), // 名称
         value: $('.assets-val').val() // 余额 / 额度
-    })
+    });
+
+    $('.new-chart1').fadeOut()
 }
 
 function addCredit() {
@@ -255,6 +257,8 @@ function addCredit() {
         alreadyVal: $('.already-val').val(), // 已出账
         leftTime: $('.left-time').val() // 剩余期数
     })
+
+    $('.new-chart2').fadeOut()
 }
 
 function deleteRow(rowId) {
