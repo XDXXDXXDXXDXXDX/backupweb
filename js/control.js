@@ -34,6 +34,11 @@ $('.bank-name').change(() => {
 //     }
 // }
 
+function clearData() {
+    localStorage.treasuryData = '';
+    location.reload();
+}
+
 function appendAssetsItem(id, name, value) {
     $('.assets').append(`
         <div id="${id}" class="assets-item">
@@ -49,6 +54,11 @@ function appendAssetsItem(id, name, value) {
         $('.delete-chart').unbind();
         $('.delete-chart').click(function() {
             deleteRow(`${id}`);
+        });
+
+        $('.update-chart').unbind();
+        $('.update-chart').click(function() {
+            updateChart(id, 0);
         });
     });
     
@@ -131,12 +141,19 @@ function appendCreditItem(id, name, value, waitVal, alreadyVal, leftTime) {
 
     $(`#${id}`).click(function() {
         $('.chart-action').fadeIn();
+
+        $('.delete-chart').unbind();
+        $('.delete-chart').click(function() {
+            deleteRow(id);
+        });
+
+        $('.update-chart').unbind();
+        $('.update-chart').click(function() {
+            updateChart(id, 1);
+        });
     });
 
-    $('.delete-chart').unbind();
-    $('.delete-chart').click(function() {
-        deleteRow(`${id}`);
-    });
+    
 
     // $(`.${name}-${value}`).on({
     //     touchstart: function(e){
@@ -197,6 +214,71 @@ function appendCreditItem(id, name, value, waitVal, alreadyVal, leftTime) {
 }
 
 // $('.confirm-chart').click(addAssets);
+function updateChart(id, type) {
+    if(type == 0) {
+        $('body').append(
+            `<div class="new-chart1 update-chart-box" style="display:block">
+                <div class="chart-ctn">
+                    <div class="item-ctn">
+                        <input type="text" placeholder="NAME" class="assets-name2" value="${$(`#${id} .assets-name-2`).html()}">
+                        <input type="number" placeholder="额度/剩余额度" class="assets-val2" value="${toNumber($(`#${id} .assets-val-2`).html())}">
+                    </div>
+                    <div class="chart-ctn-btn-group">
+                        <button class="cancel-chart" onclick="$('.update-chart-box').remove()">取&nbsp;&nbsp;消</button>
+                        <button class="confirm-chart" onclick="updateAssets(${id})">确&nbsp;&nbsp;认</button>
+                    </div>
+                </div>
+            </div>`
+        );
+    }else{
+        $('body').append(
+            `<div class="new-chart2 update-chart-box" style="display:block">
+                <div class="chart-ctn">
+                    <div class="item-ctn">
+                        <input type="text" placeholder="NAME" class="credit-name2" value="${$(`#${id} .credit-name-2`).html()}">
+                        <input type="text" placeholder="额度/剩余额度" class="credit-val2" value="${toNumber($(`#${id} .credit-val-2`).html())}">
+                        <input type="text" placeholder="待还金额" class="wait-val2" value="${toNumber($(`#${id} .wait-val-2`).html())}">
+                        <input type="text" placeholder="出帐待还" class="already-val2" value="${toNumber($(`#${id} .already-val-2`).html())}">
+                        <input type="text" placeholder="剩余期数" class="left-time2" value="${$(`#${id} .left-time-2`).html()}">
+                    </div>
+                    <div class="chart-ctn-btn-group">
+                        <button class="cancel-chart" onclick="$('.update-chart-box').remove()">取&nbsp;&nbsp;消</button>
+                        <button class="confirm-chart" onclick="addCredit()">确&nbsp;&nbsp;认</button>
+                    </div>
+                </div>
+            </div>`
+        );
+    } 
+}
+
+function updateAssets(id) {
+    $(`#${id} .assets-name-2`).html($('.assets-name2').val());
+    $(`#${id} .assets-val-2`).html(`￥${toMoney($('.assets-val2').val())}`);
+
+    updateStorage('update', {
+        id: id,
+        type: 0, // 0资产类 1信用卡类
+        name: $('.assets-name2').val(), // 名称
+        value: $('.assets-val2').val() // 余额 / 额度
+    });
+
+    $('.update-chart-box').remove()
+    $('.chart-action').fadeOut();
+}
+
+function updateCredit(id) {
+    $(`#${id} .assets-name-2`).html($('.assets-name2').val());
+    $(`#${id} .assets-val-2`).html(`￥${toMoney($('.assets-val2').val())}`);
+
+    updateStorage('update', {
+        id: id,
+        type: 0, // 0资产类 1信用卡类
+        name: $('.assets-name2').val(), // 名称
+        value: $('.assets-val2').val() // 余额 / 额度
+    });
+    $('.update-chart-box').remove()
+    $('.chart-action').fadeOut();
+}
 // $('#trueMoney').change(function() {
 //     $('.item-ctn').remove();
 //     $('.chart-ctn').prepend(`
@@ -328,9 +410,11 @@ function updateStorage(status, data) {
         for(let [index, value] of treasuryDataArr.entries()) {
             if(data.id == value.id) {
                 if(data.type == 0) {
+                    treasuryDataArr[index].name = data.name;
                     treasuryDataArr[index].value = data.value;
                     break;
                 }else{
+                    treasuryDataArr[index].name = data.name;
                     treasuryDataArr[index].value = data.value;
                     treasuryDataArr[index].waitVal = data.waitVal;
                     treasuryDataArr[index].alreadyVal = data.alreadyVal;
@@ -403,4 +487,8 @@ function toNumber(string){
     
     string = string.replace(/￥|,/g, '');
     return Number(string);;
+}
+
+function clearIuput() {
+    
 }

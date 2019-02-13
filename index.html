@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MINI BANK</title>
-    <link rel="stylesheet" href="./css/style.css?v1.6">
+    <link rel="stylesheet" href="./css/style.css?v1.8">
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css">
 </head>
@@ -109,8 +109,13 @@
         <button class="cancel-clear-data" onclick="$('.clear-data').fadeOut()">取消</button>
         <button class="confirm-clear-data" onclick="localStorage.treasuryData = ''">清除数据</button>
     </div> -->
+    <i class="fas fa-trash show-clear" onclick="$('.clear-data').fadeToggle()"></i>
+    <div class="clear-data">
+        <button class="cancel-clear-data" onclick="$('.clear-data').fadeOut()">取消</button>
+        <button class="confirm-clear-data" onclick="clearData()">清除数据</button>
+    </div>
 
     <script src="./assets/jquery/jquery-3.3.1.min.js"></script>
-    <script src="./js/control.js?v1.6"></script>
+    <script src="./js/control.js?v1.8"></script>
 </body>
 </html>
