@@ -21,13 +21,23 @@ body {
     color: #8f8f8f;
 }
 
+.assets div, .credit div {
+    position: relative;
+}
+
 .add-chart {
-    float: right;
-    margin-right: 20px;
+    position: absolute;
+    /* margin-right: 12px; */
+    right: 12px;
+    top: 0;
     color: #8f8f8f;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 300;
-    margin-top: -3px;
+    width: 26px;
+    height: 26px;
+    display: block;
+    text-align: center;
+    line-height: 26px;
 }
 
 .top-head input {
@@ -102,6 +112,7 @@ body {
 }
 
 .assets, .credit {
+    position: relative;
     padding: 0 20px;
 }
 
@@ -200,13 +211,13 @@ body {
 }
 
 .chart-action {
-    padding: 20px;
+    padding: 20px 0px;
     top: 40%;
     display: none;
     text-align: center;
 }
 
-.confirm-chart, .cancel-chart, .chart-action .cancel-chart-action, .chart-action .delete-chart {
+.confirm-chart, .cancel-chart, .chart-action .cancel-chart-action, .chart-action .delete-chart, .chart-action .update-chart {
     width: 66px;
     height: 34px;
     background-color: #3EDEED;
@@ -222,8 +233,13 @@ body {
     margin-right: 20px;
 }
 
+.update-chart {
+    background-color: #3EDEED;
+}
+
 .chart-action .delete-chart {
     background-color: #ff425c;
+    margin-right: 20px;
 }
 
 .cancel-chart {
