@@ -139,6 +139,9 @@ body {
     padding: 0 13px 8px 13px;
     box-sizing: border-box;
     position: relative;
+    transition: background-color 0.5s;
+    -moz-transition: background-color 0.5s; /* Firefox 4 */
+    -webkit-transition: background-color 0.5s;
 }
 
 .assets-item .assets-name-2 {
@@ -173,9 +176,12 @@ body {
     padding: 0 13.34px;
     box-sizing: border-box;
     padding-top: 8px;
+    transition: background-color 0.5s;
+    -moz-transition: background-color 0.5s; /* Firefox 4 */
+    -webkit-transition: background-color 0.5s;
 }
 
-.credit-item:active, .assets-item:active {
+.credit-item:hover, .assets-item:hover {
     background-color: #929191;
 } 
 
@@ -219,11 +225,18 @@ body {
     /* right:20px; */
     float: right;
     color:#8f8f8f;
-    font-size:20px;
+    font-size:16px;
     margin-right: 33px;
-    margin-top: 16px;
+    margin-top: 17px;
+    transition: color 0.3s;
+    -moz-transition: color 0.3s; /* Firefox 4 */
+    -webkit-transition: color 0.3s;
 }
-.show-clear:active {
+.show-clear:hover {
+    /* animation: red2white 5s;
+    -moz-animation: red2white 5s;	/* Firefox */
+    /* -webkit-animation: red2white 5s;	/* Safari 和 Chrome */
+    /* -o-animation: red2white 5s; */
     color:#ff425c;
 }
 
